@@ -1,3 +1,7 @@
+import Shapes.Circle;
+import Shapes.Rect;
+import Shapes.Shape;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,7 +26,9 @@ class DrawingCanvas extends Canvas {
                 int size = controlPanel.getSelectedSize();
 
                 // Add a shape to the list based on the selected values
-                if ("Circle".equals(shapeType)) {
+                if ("Circle".equals(shapeType)) { // use .equals to compare string content in Java.
+                    // == operator should only be used when you want to compare object references,
+                    // not their content.
                     shapes.add(new Circle(size, e.getPoint(), color));
                 } else if ("Square".equals(shapeType)) {
                     // Assuming the size is used as both width and height for simplicity
@@ -36,7 +42,7 @@ class DrawingCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        for (Shape shape : shapes) {
+        for (Shapes.Shape shape : shapes) {
             shape.draw(g);
         }
     }

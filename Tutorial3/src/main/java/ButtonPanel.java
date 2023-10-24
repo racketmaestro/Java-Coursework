@@ -5,17 +5,23 @@ import java.awt.event.ActionListener;
 
 public class ButtonPanel extends JPanel {
     public ButtonPanel() {
+        setLayout(new BorderLayout());
+
+        // Create a top panel to hold button and controlPanel
+        JPanel topPanel = new JPanel(new FlowLayout());
+
+        // Create button, controlPanel, and drawingCanvas
         JButton button = new JButton("Press Here");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("button pressed");
-            }
-        });
         ControlPanel controlPanel = new ControlPanel();
         DrawingCanvas drawingCanvas = new DrawingCanvas(controlPanel);
-        this.setLayout(new GridLayout(1,2));
 
-        this.add(controlPanel);
-        this.add(drawingCanvas);
+        // Add button and controlPanel to topPanel
+        topPanel.add(button);
+        topPanel.add(controlPanel);
+
+        // Add topPanel to the NORTH region and drawingCanvas to the CENTER region
+        add(topPanel, BorderLayout.NORTH);
+        add(drawingCanvas, BorderLayout.CENTER);
     }
 }
+

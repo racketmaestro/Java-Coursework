@@ -6,45 +6,39 @@ public class ControlPanel extends JPanel {
     private JComboBox<String> shapeSelector;
 
     public ControlPanel() {
-        setLayout(new GridLayout(8, 1)); // 8 components (3 RGB labels, 3 RGB sliders, 1 shape selector, 1 size slider)
+        setLayout(new GridLayout(7, 1)); // 7 rows for components
 
         // RGB Sliders with labels
         redSlider = new JSlider(0, 255);
         greenSlider = new JSlider(0, 255);
         blueSlider = new JSlider(0, 255);
 
-        JLabel redLabel = new JLabel("Red:");
-        JLabel greenLabel = new JLabel("Green:");
-        JLabel blueLabel = new JLabel("Blue:");
+        addLabeledSlider("Red:", redSlider);
+        addLabeledSlider("Green:", greenSlider);
+        addLabeledSlider("Blue:", blueSlider);
 
-        // Shape selector dropdown
+        // Shapes.Shape selector dropdown
         String[] shapes = {"Circle","Square"};
         shapeSelector = new JComboBox<>(shapes);
+        add(shapeSelector);
 
         // Size slider with label
         sizeSlider = new JSlider(10, 100);
-        JLabel sizeLabel = new JLabel("Size:");
+        addLabeledSlider("Size:", sizeSlider);
+    }
 
-        // Add components to the panel
-        add(redLabel);
-        add(redSlider);
-
-        add(greenLabel);
-        add(greenSlider);
-
-        add(blueLabel);
-        add(blueSlider);
-
-        add(shapeSelector);
-
-        add(sizeLabel);
-        add(sizeSlider);
+    private void addLabeledSlider(String labelText, JSlider slider) {
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel label = new JLabel(labelText);
+        panel.add(label, BorderLayout.WEST);
+        panel.add(slider, BorderLayout.CENTER);
+        add(panel);
     }
 
     // Getter methods to access the selected values
     public Color getSelectedColor() {
         return new Color(redSlider.getValue(), greenSlider.getValue(), blueSlider.getValue());
-    }
+    } // Returns a Color class, not an array!! Color class takes 3 values for R G B
 
     public String getSelectedShape() {
         return (String) shapeSelector.getSelectedItem();
